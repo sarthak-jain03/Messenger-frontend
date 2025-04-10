@@ -16,17 +16,20 @@ const CheckPasswordPage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  // Get user from location.state or localStorage
+  const user = location?.state || JSON.parse(localStorage.getItem('loginUser'));
+
   useEffect(() => {
-    if (!location?.state?.name || !location?.state?._id) {
+    if (!user?.name || !user?._id) {
       navigate('/email');
       return;
     }
 
     setData(prev => ({
       ...prev,
-      userId: location.state._id
+      userId: user._id
     }));
-  }, [location, navigate]);
+  }, [user, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +68,9 @@ const CheckPasswordPage = () => {
         dispatch(setUser(userData));
         localStorage.setItem('token', userData.token);
 
+        // Clean up temporary user storage
+        localStorage.removeItem('loginUser');
+
         setData({
           password: '',
           userId: ''
@@ -82,8 +88,8 @@ const CheckPasswordPage = () => {
       <div className='bg-white w-full max-w-md rounded overflow-hidden p-5 mx-auto'>
         <div className='flex justify-center items-center flex-col'>
           <Avatar
-            name={location?.state?.name}
-            imageUrl={location?.state?.profile_pic}
+            name={user?.name}
+            imageUrl={user?.profile_pic}
             width={120}
             height={120}
           />
@@ -91,7 +97,6 @@ const CheckPasswordPage = () => {
         <h3 className='flex justify-center items-center mt-6 text-xl font-bold'>Welcome to Messenger!</h3>
 
         <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
-          {/* PASSWORD FIELD */}
           <div className='flex flex-col gap-1'>
             <label htmlFor='password'>Password</label>
             <input

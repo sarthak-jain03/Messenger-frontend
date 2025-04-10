@@ -62,7 +62,13 @@ const CheckPasswordPage = () => {
         setData({
           password : "",
         })
-        navigate('/')
+        navigate(`/${data._id}`)
+        dispatch(setUser({
+          _id: response.data._id,
+          name: response.data.name,
+          email: response.data.email,
+          profile_pic: response.data.profile_pic
+        }))
     }
 
     } catch (error) {

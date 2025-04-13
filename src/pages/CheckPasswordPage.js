@@ -44,7 +44,7 @@ const CheckPasswordPage = () => {
 
     try {
       const response = await axios({
-        method: "POST",
+        method: "post",
         url: URL,
         data: {
           userId: location?.state?._id,
@@ -62,7 +62,7 @@ const CheckPasswordPage = () => {
         setData({
           password : "",
         })
-        window.location.href = process.env.REACT_APP_FRONTEND_URL || "/"
+        navigate('/')
     }
 
     } catch (error) {

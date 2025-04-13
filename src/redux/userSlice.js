@@ -5,13 +5,13 @@ const initialState = {
   name: "",
   email: "",
   profile_pic: "",
-  token: "",
+  token: localStorage.getItem("token") || "",  // ✅
   onlineUser: [],
   socketConnection: null
 };
 
 export const userSlice = createSlice({
-  name: 'user', // ❗ remove extra space here
+  name: 'user',
   initialState,
   reducers: {
     setUser: (state, action) => {
@@ -22,6 +22,7 @@ export const userSlice = createSlice({
     },
     setToken: (state, action) => {
       state.token = action.payload;
+      localStorage.setItem("token", action.payload); // ✅ persist token
     },
     logout: (state) => {
       state._id = "";
@@ -31,6 +32,7 @@ export const userSlice = createSlice({
       state.token = "";
       state.socketConnection = null;
       state.onlineUser = [];
+      localStorage.removeItem("token"); // ✅ remove token
     },
     setOnlineUser: (state, action) => {
       state.onlineUser = action.payload;
@@ -41,7 +43,12 @@ export const userSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { setUser, setToken, logout, setOnlineUser, setSocketConnection } = userSlice.actions;
+export const {
+  setUser,
+  setToken,
+  logout,
+  setOnlineUser,
+  setSocketConnection
+} = userSlice.actions;
 
 export default userSlice.reducer;

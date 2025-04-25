@@ -4,10 +4,11 @@ import App from "../App";
 import CheckEmailPage from "../pages/CheckEmailPage";
 import CheckPasswordPage from "../pages/CheckPasswordPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
-import ResetPasswordPage from "../pages/ResetPasswordPage"; // ✅ added import
+import ResetPasswordPage from "../pages/ResetPasswordPage";
 import Home from "../pages/Home";
 import MessagePage from "../components/MessagePage";
 import AuthLayouts from "../layout";
+import PrivateRoute from "../components/PrivateRoute"; // Import your PrivateRoute
 
 const router = createBrowserRouter([
   {
@@ -40,12 +41,16 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":userId",
-            element: <MessagePage />
-          }
-        ]
-      }
-    ]
-  }
+            element: (
+              <PrivateRoute>
+                <MessagePage />
+              </PrivateRoute>
+            ),
+          },
+        ],
+      },
+    ],
+  },
 ]);
 
 export default router;

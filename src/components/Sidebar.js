@@ -59,6 +59,7 @@ const Sidebar = () => {
 
   const handleLogout = () => 
     {
+    localStorage.removeItem("token");
     dispatch(logout())
     navigate('/email')
   }

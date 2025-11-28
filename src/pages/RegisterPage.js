@@ -78,7 +78,7 @@ const RegisterPage = () => {
   return (
     <div className='mt-5 '>
       <div className='bg-white w-full max-w-md rounded overflow-hidden p-5 mx-auto'>
-        <h3 className='flex justify-center items-center text-xl font-bold'>Welcome to Messenger!</h3>
+        <h3 className='flex justify-center items-center text-xl font-bold'>Welcome to SignalBridge!</h3>
         
         <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
           {/*  NAME  */}

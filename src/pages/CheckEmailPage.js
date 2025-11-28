@@ -58,7 +58,7 @@ const CheckEmailPage = () => {
           size={120}
           className='rounded-full shadow'/>
         </div>
-        <h3 className='flex justify-center items-center mt-6 text-xl font-bold'>Welcome to Messenger!</h3>
+        <h3 className='flex justify-center items-center mt-6 text-xl font-bold'>Welcome to SignalBridge!</h3>
         
         <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
           
